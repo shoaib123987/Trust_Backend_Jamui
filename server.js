@@ -16,10 +16,14 @@ app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
 
 // ------------------------- MongoDB Connection -------------------------
-const uri = 'mongodb+srv://TrustJamui:123456%40Shoaib@trustjamui.tdsogqv.mongodb.net/TrustJamuiDB?retryWrites=true&w=majority';
-mongoose.connect(uri)
-    .then(() => console.log('MongoDB Atlas connected successfully'))
-    .catch(err => console.error('MongoDB connection error:', err));
+const uri = 'mongodb://TrustJamui:123456%40Shoaib@ac-xxxx-shard-00-00.tdsogqv.mongodb.net:27017,ac-xxxx-shard-00-01.tdsogqv.mongodb.net:27017,ac-xxxx-shard-00-02.tdsogqv.mongodb.net:27017/TrustJamuiDB?ssl=true&replicaSet=atlas-xxxx-shard-0&authSource=admin&retryWrites=true&w=majority';
+
+mongoose.connect(uri, {
+    dbName: "TrustJamuiDB",
+    serverSelectionTimeoutMS: 30000
+})
+.then(() => console.log('MongoDB Atlas connected successfully'))
+.catch(err => console.error('MongoDB connection error:', err));
 
 // ------------------------- Razorpay Setup -------------------------
 const razorpay = new Razorpay({
