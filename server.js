@@ -32,10 +32,12 @@ const razorpay = new Razorpay({
 
 // ------------------------- Nodemailer Setup -------------------------
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
     auth: {
-        user: 'rahmanishoaibnsw531@gmail.com',      // Replace with your email
-        pass: 'eavi unei syif yjsc'    // Gmail App Password
+        user: "rahmanishoaibnsw531@gmail.com",
+        pass: "eaviunei syifyjsc" // spaces hata do
     }
 });
 
