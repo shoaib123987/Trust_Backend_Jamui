@@ -33,8 +33,8 @@ const razorpay = new Razorpay({
 // ------------------------- Nodemailer Setup -------------------------
 const transporter = nodemailer.createTransport({
     host: "server4.gosecureserver.in",
-    port: 587,
-    secure: false, // TLS start
+    port: 465,
+    secure: true,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -102,7 +102,7 @@ app.post('/send-success-mail', async (req, res) => {
     const { name, email, mobile, amount, paymentId } = req.body;
     try {
     await transporter.sendMail({
-  from: 'donations@alihasanrahmanifoundation.org',
+  from: `"Ali Hasan Rahmani Foundation" <${process.env.EMAIL_USER}>`
   to: email,
   subject: '🌙 JazakAllah Khair for Your Donation',
   html: `
@@ -162,7 +162,7 @@ app.post('/send-success-mail', async (req, res) => {
 });
 
         await transporter.sendMail({
-            from: 'donations@alihasanrahmanifoundation.org',
+          from: `"Ali Hasan Rahmani Foundation" <${process.env.EMAIL_USER}>`
             to: 'admin@alihasanrahmanifoundation.org',
             subject: 'New Donation Received',
             html: `<h2>Donation Details</h2>
