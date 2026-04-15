@@ -26,18 +26,18 @@ mongoose.connect(uri, {
 
 // ------------------------- Razorpay Setup -------------------------
 const razorpay = new Razorpay({
-    key_id: 'rzp_test_SHbEiErbDCXdjd',
-    key_secret: '5NfkqGlP1ue7YnjV5M0t2s6j'
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
 // ------------------------- Nodemailer Setup -------------------------
 const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: "server4.gosecureserver.in",
     port: 587,
-    secure: false,
+    secure: false, // TLS start
     auth: {
-        user: "rahmanishoaibnsw531@gmail.com",
-        pass: "eaviunei syifyjsc" // spaces hata do
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 
@@ -102,7 +102,7 @@ app.post('/send-success-mail', async (req, res) => {
     const { name, email, mobile, amount, paymentId } = req.body;
     try {
     await transporter.sendMail({
-  from: 'rahmanishoaibnsw531@gmail.com',
+  from: 'donations@alihasanrahmanifoundation.org',
   to: email,
   subject: '🌙 JazakAllah Khair for Your Donation',
   html: `
@@ -162,8 +162,8 @@ app.post('/send-success-mail', async (req, res) => {
 });
 
         await transporter.sendMail({
-            from: 'rahmanishoaibnsw531@gmail.com',
-            to: 'shoaibrahmanii777@gmail.com',
+            from: 'donations@alihasanrahmanifoundation.org',
+            to: 'admin@alihasanrahmanifoundation.org',
             subject: 'New Donation Received',
             html: `<h2>Donation Details</h2>
                    <p>Name: ${name}</p>
