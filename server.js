@@ -102,7 +102,7 @@ app.post('/send-success-mail', async (req, res) => {
     const { name, email, mobile, amount, paymentId } = req.body;
     try {
     await transporter.sendMail({
-  from: `"Ali Hasan Rahmani Foundation" <${process.env.EMAIL_USER}>`
+  from: `"Ali Hasan Rahmani Foundation" <${process.env.EMAIL_USER}>`,
   to: email,
   subject: '🌙 JazakAllah Khair for Your Donation',
   html: `
@@ -162,7 +162,7 @@ app.post('/send-success-mail', async (req, res) => {
 });
 
         await transporter.sendMail({
-          from: `"Ali Hasan Rahmani Foundation" <${process.env.EMAIL_USER}>`
+          from: `"Ali Hasan Rahmani Foundation" <${process.env.EMAIL_USER}>`,
             to: 'admin@alihasanrahmanifoundation.org',
             subject: 'New Donation Received',
             html: `<h2>Donation Details</h2>
