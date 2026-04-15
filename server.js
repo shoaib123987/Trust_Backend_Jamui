@@ -101,7 +101,7 @@ app.post('/create-order', async (req, res) => {
 app.post('/send-success-mail', async (req, res) => {
     const { name, email, mobile, amount, paymentId } = req.body;
     try {
-    await transporter.sendMail({
+   const info= await transporter.sendMail({
   from: `"Ali Hasan Rahmani Foundation" <${process.env.EMAIL_USER}>`,
   to: email,
   subject: '🌙 JazakAllah Khair for Your Donation',
@@ -175,8 +175,10 @@ app.post('/send-success-mail', async (req, res) => {
         });
 
         res.json({ success: true });
+          console.log("✅ USER EMAIL SENT:", info.response);
     } catch (err) {
         console.error(err);
+        console.log("❌ USER EMAIL ERROR:", err);
         res.status(500).json({ success: false, message: 'Email sending failed' });
     }
 });
