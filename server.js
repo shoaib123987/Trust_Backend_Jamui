@@ -9,7 +9,18 @@ const multer = require('multer');
 const path = require('path');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: [
+        'https://alihasanrahmanifoundation.org',
+        'http://localhost:4200'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
+
+// VERY IMPORTANT 🔥
+app.options('*', cors());
 app.use(bodyParser.json());
 
 // Serve static files (uploads)
